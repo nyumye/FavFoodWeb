@@ -11,6 +11,11 @@ func main() {
 	e := echo.New()
 	SetRender(e)
 
+	e.Static("/", "public")
+	// e.Static("/js/boot_test.js", "../../public/js/boot_test.js")
+	// e.Static("/img/donut.png", "../../public/image/donut.png")
+	// e.Static("/img/rice-cake.png", "../../public/image/rice-cake.png")
+
 	e.GET("/top", func(c echo.Context) error {
 		return c.Render(http.StatusOK, "top", nil)
 	})
