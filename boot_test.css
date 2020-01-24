@@ -1,0 +1,114 @@
+body {
+  font-feature-settings: "palt"; }
+
+.header {
+  height: 5em;
+  background-color: #fea5ad; }
+  .header a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 2.5em; }
+    .header a:hover {
+      color: white; }
+
+article {
+  position: relative; }
+
+@media screen and (min-width: 1281px) {
+  #question {
+    height: calc(1280*0.35px + 10vw); }
+    #question .lead {
+      top: 3vw;
+      left: 8vw; }
+      #question .lead p {
+        margin-bottom: 19px;
+        font-size: 100px; } }
+@media print, screen and (min-width: 600px) {
+  #question {
+    height: calc(1280*0.35px + 10vw); }
+    #question .lead {
+      top: 3vw;
+      left: 8vw; }
+      #question .lead p {
+        margin-bottom: 2px;
+        font-size: 100px; }
+      #question .lead figure {
+        top: 1.2vw;
+        left: 55vw;
+        width: 25vw; }
+
+  #discription {
+    height: calc(1280*0.35px + 10vw); }
+    #discription .lead {
+      top: 14vw;
+      left: 40vw; }
+      #discription .lead h2 {
+        top: -8vw;
+        left: -5vw;
+        font-size: 90px; }
+      #discription .lead div p {
+        margin-bottom: 5px;
+        font-size: 1.8vw; }
+      #discription .lead figure {
+        top: -8vw;
+        left: -35vw;
+        width: 25vw; } }
+#question {
+  background-color: #f8c3af; }
+  #question .lead {
+    position: absolute;
+    z-index: 100; }
+    #question .lead p {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      font-weight: 900;
+      white-space: nowrap;
+      letter-spacing: 0.08em; }
+    #question .lead figure {
+      position: absolute; }
+
+#discription {
+  background-color: white; }
+  #discription .lead {
+    position: absolute;
+    z-index: 100; }
+    #discription .lead h2 {
+      position: absolute;
+      z-index: 0;
+      color: #fdede7; }
+    #discription .lead div {
+      position: relative; }
+      #discription .lead div p {
+        position: relative;
+        display: inline-block;
+        color: #f8c3af;
+        font-weight: 900;
+        white-space: nowrap;
+        letter-spacing: 0.08em; }
+    #discription .lead figure {
+      position: absolute; }
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, figcaption, figure, footer, header, hgroup, menu, nav, section, summary, time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+  background: transparent; }
+
+h2 {
+  font-weight: bold; }
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0; }
+
+img {
+  width: 100%;
+  z-index: 11; }
+
+/*# sourceMappingURL=boot_test.css.map */
