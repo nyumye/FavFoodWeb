@@ -1,3 +1,4 @@
 *.pptx
 *.mdp
 *.exe
+/FavFoodWeb/vendor

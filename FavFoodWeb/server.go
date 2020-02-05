@@ -8,6 +8,8 @@ import (
 
 func main() {
 
+	initDatabase()
+
 	e := echo.New()
 	SetRender(e)
 
