@@ -21,6 +21,7 @@ type foodDataModel struct {
 	Name      string `json:"name" bson:"name"`
 	BriefDesc string `json:"brief_desc" bson:"brief_desc"`
 	MainDesc  string `json:"main_desc" bson:"main_desc"`
+	ImageUri  string `json:"image_uri" bson:"image_uri"`
 }
 
 func prepareMongoClient() {
@@ -65,15 +66,17 @@ func makeInitialFoodData() []foodDataModel {
 	return []foodDataModel{
 		foodDataModel{
 			ID:        "0",
-			Name:      "donut",
+			Name:      "ドーナツ",
 			BriefDesc: "おいしいドーナツ",
 			MainDesc:  "おいしいけどカロリーおよび糖質が気になる。",
+			ImageUri:  "./image/donut.png",
 		},
 		foodDataModel{
 			ID:        "1",
-			Name:      "rice_cake",
-			BriefDesc: "焼きもち",
+			Name:      "焼きもち",
+			BriefDesc: "あの日夢見たビジュアル系焼きもち",
 			MainDesc:  "焼いた餅。こんな感じに膨らむことは無いし、膨らんだ面に焼き色が付くことは無いがこうしたほうがおいしそうなのでそうした。ぜんざいに入れるとおいしいのだが、この前1kgのあんこ買ってきたら毎日のように食べてしまったし、もちも食べる度に二個食べてしまったので危ないなと思ってそれ以来買っていない。",
+			ImageUri:  "./image/rice-cake.png",
 		},
 	}
 }
@@ -100,7 +103,7 @@ func findAllFoodDocument() []foodDataModel {
 	return results
 }
 
-func initDatabase() {
+func prepareDatabase() {
 	// favfoodweb -> foods collection
 	prepareMongoClient()
 	if err := prepareMongoCollection(); err != nil {
@@ -111,7 +114,7 @@ func initDatabase() {
 
 	// foods := findAllFoodDocument()
 	// for _, food := range foods {
-	// 	fmt.Println(food)
+	// 	fmt.Println(food.Name)
 	// }
 
 }

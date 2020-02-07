@@ -1,30 +1,18 @@
 {{ define "content" }}
 <div class="container-fluid">
     <div class="row justify-content-center align-items-center">
+        {{ range .Foods }}
         <div class="card text-center col-3" style="width: 20rem;">
-            <img class="card-img-top" src="./image/donut.png" alt="Card image cap">
+            <img class="card-img-top" src="{{ .ImageUri }}" alt="Card image cap">
             <div class="card-block">
-              <h4 class="card-title">ドーナツ</h4>
-              <p class="card-text">
-                  ドーナツはうまいが、いちごチョコがかかっているとビジュアルが良くなり気分的にさらにおいしい。
-                  加えてそこにカラースプレーがかかっていようものなら。。。。。。
-              </p>
+                <h4 class="card-title">{{ .Name }}</h4>
+                <p class="card-text">
+                    {{ .MainDesc }}
+                </p>
               <a href="#" class="btn btn-primary">うまい！</a>
             </div>
         </div>
-
-        <div class="card text-center col-3" style="width: 20rem;">
-            <img class="card-img-top" src="./image/rice-cake.png" alt="Card image cap">
-            <div class="card-block">
-              <h4 class="card-title">焼きもち</h4>
-              <p class="card-text">
-                  焼いた餅。こんな感じに膨らむことは無いし、膨らんだ面に焼き色が付くことは無いがこうしたほうがおいしそうなのでそうした。
-                  ぜんざいに入れるとおいしいのだが、この前1kgのあんこ買ってきたら毎日のように食べてしまったし、
-                  もちも食べる度に二個食べてしまったので危ないなと思ってそれ以来買っていない。
-              </p>
-              <a href="#" class="btn btn-primary">うまい！</a>
-            </div>
-        </div>
+        {{ end }}
     </div>
 </div>
 {{end}}
