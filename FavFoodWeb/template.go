@@ -32,20 +32,21 @@ func SetRender(e *echo.Echo) {
 
 // implementation of Renderer interface
 func (t *Template) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
-	return t.templates[name].Execute(w, t.templatesData[name])
+	err := t.templates[name].Execute(w, t.templatesData[name])
+	return err
 }
 
 // register template in Template.templates
 func (t *Template) registerTemplates() {
 	//set base template
 	baseTemplate = template.Must(template.ParseGlob(baseTemplatePattern))
-	baseTemplateDatas = makeTemplateDatas("base")
+	baseTemplateDatas = makeBaseTemplateDatas()
 
 	t.templates["top"] = parseGlobWithBase("./templates/top/*.html")
-	t.templatesData["top"] = makeTemplateDatasWithBase("top")
+	t.templatesData["top"] = new(templateDatas).registerCssJsDatasWithBase("top")
 
 	t.templates["products"] = parseGlobWithBase("./templates/products/*.html")
-	t.templatesData["products"] = makeTemplateDatasWithBase("products")
+	t.templatesData["products"] = new(templateDatas).registerCssJsDatasWithBase("products").registerAllFoodDocument()
 
 }
 
@@ -61,23 +62,26 @@ var baseTemplateDatas *templateDatas
 type templateDatas struct {
 	Csses []string
 	Jses  []string
-	// Images []string
+	Foods []foodDataModel
 }
 
-func makeTemplateDatas(folderName string) *templateDatas {
+func makeBaseTemplateDatas() *templateDatas {
 	return &templateDatas{
-		Csses: readPublicDir(folderName+"/css", ".css"),
-		Jses:  readPublicDir(folderName+"/js", ".js"),
+		Csses: readPublicDir("base/css", ".css"),
+		Jses:  readPublicDir("base/js", ".js"),
 		// Images: readPublicDir(folderName + "/image"),
 	}
 }
 
-func makeTemplateDatasWithBase(folderName string) *templateDatas {
-	return &templateDatas{
-		Csses: append(baseTemplateDatas.Csses, readPublicDir(folderName+"/css", ".css")...),
-		Jses:  append(baseTemplateDatas.Jses, readPublicDir(folderName+"/js", ".js")...),
-		// Images: append(baseTemplateDatas.Images, readPublicDir(folderName+"/image")...),
-	}
+func (tempDatas *templateDatas) registerCssJsDatasWithBase(folderName string) *templateDatas {
+	tempDatas.Csses = append(baseTemplateDatas.Csses, readPublicDir(folderName+"/css", ".css")...)
+	tempDatas.Jses = append(baseTemplateDatas.Jses, readPublicDir(folderName+"/js", ".js")...)
+	return tempDatas
+	// return &templateDatas{
+	// 	Csses: append(baseTemplateDatas.Csses, readPublicDir(folderName+"/css", ".css")...),
+	// 	Jses:  append(baseTemplateDatas.Jses, readPublicDir(folderName+"/js", ".js")...),
+	// 	// Images: append(baseTemplateDatas.Images, readPublicDir(folderName+"/image")...),
+	// }
 }
 
 var publicPath = "./public/"
@@ -96,4 +100,10 @@ func readPublicDir(dirname, suffix string) []string {
 		}
 	}
 	return pathes
+}
+
+// set all food data in database
+func (tempDatas *templateDatas) registerAllFoodDocument() *templateDatas {
+	tempDatas.Foods = findAllFoodDocument()
+	return tempDatas
 }

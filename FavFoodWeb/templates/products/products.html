@@ -1,3 +1,18 @@
 {{ define "content" }}
-<h1>今回は商品紹介でございます</h1>
+<div class="container-fluid">
+    <div class="row justify-content-center align-items-center">
+        {{ range .Foods }}
+        <div class="card text-center col-3" style="width: 20rem;">
+            <img class="card-img-top" src="{{ .ImageUri }}" alt="Card image cap">
+            <div class="card-block">
+                <h4 class="card-title">{{ .Name }}</h4>
+                <p class="card-text">
+                    {{ .MainDesc }}
+                </p>
+              <a href="#" class="btn btn-primary">うまい！</a>
+            </div>
+        </div>
+        {{ end }}
+    </div>
+</div>
 {{end}}
