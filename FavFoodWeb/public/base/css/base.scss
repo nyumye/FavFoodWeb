@@ -6,8 +6,10 @@ body{
 
 
 .header{
-    height: 5em;
     
+    position: relative;
+    z-index: 500;
+    height: 5em;
     background-color: #fea5ad;
 
     a{
@@ -16,7 +18,7 @@ body{
         font-weight: bold;
         font-size: 2.5em;
         transition: color .5s;
-
+        z-index: 500;
         &:hover{
             color: darken($color: white, $amount: 10%)
         }

@@ -1,0 +1,51 @@
+article {
+  position: relative; }
+
+@media screen and (min-width: 1281px) {
+  #fortune {
+    height: calc(1280*0.35px + 10vw); }
+    #fortune .lead {
+      top: 3vw;
+      left: 8vw; }
+      #fortune .lead p {
+        margin-bottom: 19px;
+        font-size: 100px; } }
+@media print, screen and (min-width: 600px) {
+  #fortune {
+    height: 69vw; }
+    #fortune .lead #pekapeka {
+      top: -10vw;
+      left: 16vw;
+      width: 65vw; }
+    #fortune .lead #fortuneball {
+      top: 10vw;
+      left: 37vw;
+      width: 25vw; } }
+#fortune {
+  background-color: #f8c3af; }
+  #fortune .lead {
+    position: absolute;
+    width: 100%; }
+    #fortune .lead p {
+      position: relative;
+      display: inline-block;
+      color: #fff;
+      font-weight: 900;
+      white-space: nowrap;
+      letter-spacing: 0.08em; }
+    #fortune .lead figure {
+      position: absolute; }
+
+h2 {
+  font-weight: bold; }
+
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: 0; }
+
+img {
+  width: 100%;
+  z-index: 5; }
+
+/*# sourceMappingURL=fortune.css.map */
