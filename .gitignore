@@ -1,4 +1,5 @@
 *.pptx
 *.mdp
 *.exe
-/FavFoodWeb/vendor
+/FavFoodWeb/vendor/
+/mongo/

@@ -26,6 +26,10 @@ func main() {
 		return c.Render(http.StatusOK, "products", nil)
 	})
 
+	e.GET("/fortune", func(c echo.Context) error {
+		return c.Render(http.StatusOK, "fortune", nil)
+	})
+
 	// e.GET("/hello", func(c echo.Context) error {
 	// 	return c.Render(http.StatusOK, "hello", "ZENZAI TABE TAAAAI!!!!!")
 	// })

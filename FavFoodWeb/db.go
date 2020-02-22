@@ -6,6 +6,8 @@ import (
 	"log"
 	"time"
 
+	"go.mongodb.org/mongo-driver/bson/primitive"
+
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
@@ -53,11 +55,18 @@ func registerInitialFoodData() {
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
-	// opts := options.Update().SetUpsert(true)
+	opts := options.Update().SetUpsert(true)
+	var filter, update primitive.D
 
 	for _, initialFoodData := range initialFoodDatas {
-		//collections["foods"].UpdateOne(ctx, bson.D{{Key: "_id", Value: initialFoodData.ID}}, initialFoodData, opts)
-		collections["foods"].InsertOne(ctx, initialFoodData, options.InsertOne())
+		// foodBson, err := bson.Marshal(&initialFoodData)
+		// if err != nil {
+		// 	log.Fatal(err)
+		// }
+		filter = bson.D{{Key: "_id", Value: initialFoodData.ID}}
+		update = bson.D{{Key: "$set", Value: initialFoodData}}
+		collections["foods"].UpdateOne(ctx, filter, update, opts)
+		// collections["foods"].InsertOne(ctx, initialFoodData, options.InsertOne())
 	}
 }
 
@@ -69,14 +78,14 @@ func makeInitialFoodData() []foodDataModel {
 			Name:      "ドーナツ",
 			BriefDesc: "おいしいドーナツ",
 			MainDesc:  "おいしいけどカロリーおよび糖質が気になる。",
-			ImageUri:  "./image/donut.png",
+			ImageUri:  "./image/foods/donut.png",
 		},
 		foodDataModel{
 			ID:        "1",
 			Name:      "焼きもち",
 			BriefDesc: "あの日夢見たビジュアル系焼きもち",
 			MainDesc:  "焼いた餅。こんな感じに膨らむことは無いし、膨らんだ面に焼き色が付くことは無いがこうしたほうがおいしそうなのでそうした。ぜんざいに入れるとおいしいのだが、この前1kgのあんこ買ってきたら毎日のように食べてしまったし、もちも食べる度に二個食べてしまったので危ないなと思ってそれ以来買っていない。",
-			ImageUri:  "./image/rice-cake.png",
+			ImageUri:  "./image/foods/rice-cake.png",
 		},
 	}
 }

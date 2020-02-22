@@ -48,6 +48,9 @@ func (t *Template) registerTemplates() {
 	t.templates["products"] = parseGlobWithBase("./templates/products/*.html")
 	t.templatesData["products"] = new(templateDatas).registerCssJsDatasWithBase("products").registerAllFoodDocument()
 
+	t.templates["fortune"] = parseGlobWithBase("./templates/fortune/*.html")
+	t.templatesData["fortune"] = new(templateDatas).registerCssJsDatasWithBase("fortune")
+
 }
 
 //
