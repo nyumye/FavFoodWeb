@@ -1,7 +1,7 @@
 package main
 
 import (
-	"net/http"
+	"github.com/labstack/echo/middleware"
 
 	"github.com/labstack/echo"
 )
@@ -11,6 +11,9 @@ func main() {
 	prepareDatabase()
 
 	e := echo.New()
+
+	e.Use(middleware.Logger())
+
 	SetRender(e)
 
 	e.Static("/", "public")
@@ -18,25 +21,7 @@ func main() {
 	// e.Static("/img/donut.png", "../../public/image/donut.png")
 	// e.Static("/img/rice-cake.png", "../../public/image/rice-cake.png")
 
-	e.GET("/top", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "top", nil)
-	})
-
-	e.GET("/products", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "products", nil)
-	})
-
-	e.GET("/fortune", func(c echo.Context) error {
-		return c.Render(http.StatusOK, "fortune", nil)
-	})
-
-	// e.GET("/hello", func(c echo.Context) error {
-	// 	return c.Render(http.StatusOK, "hello", "ZENZAI TABE TAAAAI!!!!!")
-	// })
-
-	// e.GET("/hello2", func(c echo.Context) error {
-	// 	return c.Render(http.StatusOK, "hello", "OSHIRUKO DEMO IIYOOOOOOOOO!!!!!!")
-	// })
+	setRoute(e)
 
 	e.Logger.Fatal(e.Start(":8080"))
 }

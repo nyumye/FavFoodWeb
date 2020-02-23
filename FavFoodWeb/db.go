@@ -90,26 +90,30 @@ func makeInitialFoodData() []foodDataModel {
 	}
 }
 
-func findAllFoodDocument() []foodDataModel {
+func findFoodDocument(filter interface{}) []foodDataModel {
 	var ctx context.Context
 	var cancel context.CancelFunc
 
 	ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
-	cursor, err := collections["foods"].Find(context.Background(), bson.D{}, nil)
+	cursor, err := collections["foods"].Find(ctx, filter, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
-	cancel()
+	// cancel()
 
 	// get a list of all returned documents and print them out
 	// see the mongo.Cursor documentation for more examples of using cursors
-	ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
+	// ctx, cancel = context.WithTimeout(context.Background(), 10*time.Second)
 	var results []foodDataModel
 	if err = cursor.All(ctx, &results); err != nil {
 		log.Fatal(err)
 	}
 	cancel()
 	return results
+}
+
+func findAllFoodDocument() []foodDataModel {
+	return findFoodDocument(bson.D{})
 }
 
 func prepareDatabase() {
